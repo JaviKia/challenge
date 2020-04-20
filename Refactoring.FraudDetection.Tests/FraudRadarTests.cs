@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Refactoring.FraudDetection.Core;
 
 namespace Refactoring.FraudDetection.Tests
 {
@@ -60,9 +61,10 @@ namespace Refactoring.FraudDetection.Tests
 
         private static List<FraudRadar.FraudResult> ExecuteTest(string filePath)
         {
-            var fraudRadar = new FraudRadar();
+            IStorageReader storageReader = new StorageReader(filePath);
+            var fraudRadar = new FraudRadar(storageReader);
 
-            return fraudRadar.Check(filePath).ToList();
+            return fraudRadar.Check().ToList();
         }
     }
 }

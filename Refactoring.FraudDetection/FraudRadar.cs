@@ -4,19 +4,26 @@
 
 namespace Refactoring.FraudDetection
 {
+    using Refactoring.FraudDetection.Core;
     using System;
     using System.Collections.Generic;
     using System.IO;
 
     public class FraudRadar
     {
-        public IEnumerable<FraudResult> Check(string filePath)
+        private IStorageReader _storageReader;
+
+        public FraudRadar(IStorageReader storageReader)
+        {
+            this._storageReader = storageReader;
+        }
+        public IEnumerable<FraudResult> Check()
         {
             // READ FRAUD LINES
             var orders = new List<Order>();
             var fraudResults = new List<FraudResult>();
 
-            var lines = File.ReadAllLines(filePath);
+            var lines = this._storageReader.Read();
 
             foreach (var line in lines)
             {

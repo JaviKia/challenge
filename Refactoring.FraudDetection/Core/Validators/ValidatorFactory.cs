@@ -25,7 +25,7 @@ namespace Refactoring.FraudDetection.Core.Validators
         {
             int i = 0;
             bool isFraudulent = false;
-            while (!isFraudulent && i < _validators.Count() - 1)
+            while (!isFraudulent && i < _validators.Count())
             {
                 isFraudulent = _validators[i].Validate(currentOrder, otherOrder);
                 i++;

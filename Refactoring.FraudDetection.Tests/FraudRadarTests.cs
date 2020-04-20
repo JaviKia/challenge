@@ -41,6 +41,27 @@ namespace Refactoring.FraudDetection.Tests
         }
 
         [TestMethod]
+        [DeploymentItem("./Files/TwoLines_FraudulentSecondOtherCase.txt", "Files")]
+        public void CheckFraud_TwoLinesOtherCase_SecondLineFraudulent()
+        {
+            var result = ExecuteTest(Path.Combine(Environment.CurrentDirectory, "Files", "TwoLines_FraudulentSecondOtherCase.txt"));
+
+            result.Should().NotBeNull("The result should not be null.");
+            result.Should().HaveCount(1, "The result should contains the number of lines of the file");
+            result.First().IsFraudulent.Should().BeTrue("The first line is not fraudulent");
+            result.First().OrderId.Should().Be(2, "The first line is not fraudulent");
+        }
+
+        [TestMethod]
+        [DeploymentItem("./Files/TwoLines.txt", "Files")]
+        public void CheckFraud_TwoLines_NoFraudExpected()
+        {
+            var result = ExecuteTest(Path.Combine(Environment.CurrentDirectory, "Files", "TwoLines.txt"));
+
+            result.Should().BeEmpty();
+        }
+
+        [TestMethod]
         [DeploymentItem("./Files/ThreeLines_FraudulentSecond.txt", "Files")]
         public void CheckFraud_ThreeLines_SecondLineFraudulent()
         {

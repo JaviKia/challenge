@@ -3,7 +3,7 @@ using Refactoring.FraudDetection.Core.Interfaces;
 
 namespace Refactoring.FraudDetection.Core.Validators
 {
-    public class SameDealIdAndEmailButDifferentCreditCardValidator :ISimpleValidator
+    public class SameDealIdAndEmailButDifferentCreditCardValidator : ISimpleValidator
     {
         public bool Validate(Order currentOrder, Order otherOrder)
         {

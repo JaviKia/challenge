@@ -27,6 +27,12 @@
     <None Update="Files\ThreeLines_FraudulentSecond.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Files\TwoLines_FraudulentSecondOtherCase.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Files\TwoLines.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Files\TwoLines_FraudulentSecond.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

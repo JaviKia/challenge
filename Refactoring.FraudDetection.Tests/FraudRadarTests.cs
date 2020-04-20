@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Refactoring.FraudDetection.Core;
 using Refactoring.FraudDetection.Core.Entities;
 using Refactoring.FraudDetection.Core.Normalizers;
+using Refactoring.FraudDetection.Core.Validators;
 
 namespace Refactoring.FraudDetection.Tests
 {
@@ -65,7 +66,8 @@ namespace Refactoring.FraudDetection.Tests
         {
             var storageReader = new StorageReader(filePath);
             var orderNormalizer = new OrderNormalizer();
-            var fraudRadar = new FraudRadar(orderNormalizer, storageReader);
+            var fraudDetector = new FraudDetector();
+            var fraudRadar = new FraudRadar(orderNormalizer, fraudDetector, storageReader);
 
             return fraudRadar.Check().ToList();
         }

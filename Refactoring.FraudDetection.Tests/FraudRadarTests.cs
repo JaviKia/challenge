@@ -66,7 +66,8 @@ namespace Refactoring.FraudDetection.Tests
         {
             var storageReader = new StorageReader(filePath);
             var orderNormalizer = new OrderNormalizer();
-            var fraudDetector = new FraudDetector();
+            var validatorFactory = new ValidatorFactory();
+            var fraudDetector = new FraudDetector(validatorFactory);
             var fraudRadar = new FraudRadar(orderNormalizer, fraudDetector, storageReader);
 
             return fraudRadar.Check().ToList();

@@ -2,16 +2,16 @@
 // Copyright (c) Payvision. All rights reserved.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Refactoring.FraudDetection.Core;
 using Refactoring.FraudDetection.Core.Entities;
 using Refactoring.FraudDetection.Core.Normalizers;
 using Refactoring.FraudDetection.Core.Validators;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Refactoring.FraudDetection.Tests
 {
@@ -65,7 +65,8 @@ namespace Refactoring.FraudDetection.Tests
         private static List<FraudResult> ExecuteTest(string filePath)
         {
             var storageReader = new StorageReader(filePath);
-            var orderNormalizer = new OrderNormalizer();
+            var normalizerFactory = new NormalizerFactory();
+            var orderNormalizer = new OrderNormalizer(normalizerFactory) ;
             var validatorFactory = new ValidatorFactory();
             var fraudDetector = new FraudDetector(validatorFactory);
             var fraudRadar = new FraudRadar(orderNormalizer, fraudDetector, storageReader);

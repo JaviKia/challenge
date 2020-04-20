@@ -1,7 +1,10 @@
-﻿namespace Refactoring.FraudDetection.Core
+﻿using Refactoring.FraudDetection.Core.Entities;
+using System.Collections.Generic;
+
+namespace Refactoring.FraudDetection.Core
 {
     public interface IStorageReader
     {
-        string[] Read();
+        List<Order> Read();
     }
 }

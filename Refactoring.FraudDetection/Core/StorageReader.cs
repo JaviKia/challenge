@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using Refactoring.FraudDetection.Core.Entities;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Refactoring.FraudDetection.Core
 {
@@ -9,7 +11,23 @@ namespace Refactoring.FraudDetection.Core
         {
             this._filePath = filePath;
         }
-        public string[] Read()
+        public List<Order> Read()
+        {
+            var orders = new List<Order>();
+
+            string[] lines = ReadFile();
+
+            if (lines != null)
+            {
+                foreach (var line in lines)
+                {
+                    orders.Add(new Order(line));
+                }
+            }
+            return orders;
+        }
+
+        public virtual string[] ReadFile()
         {
             return File.ReadAllLines(_filePath);
         }

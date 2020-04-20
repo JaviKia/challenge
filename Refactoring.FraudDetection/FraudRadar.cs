@@ -23,15 +23,10 @@ namespace Refactoring.FraudDetection
         public IEnumerable<FraudResult> Check()
         {
             // READ FRAUD LINES
-            var orders = new List<Order>();
+
             var fraudResults = new List<FraudResult>();
 
-            var lines = this._storageReader.Read();
-
-            foreach (var line in lines)
-            {
-                orders.Add(new Order(line));
-            }
+            var orders = this._storageReader.Read();
 
             this._orderNormalizer.Normalize(orders);
 

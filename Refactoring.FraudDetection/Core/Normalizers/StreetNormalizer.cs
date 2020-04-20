@@ -1,8 +1,10 @@
-﻿namespace Refactoring.FraudDetection.Core.Normalizers
+﻿using Refactoring.FraudDetection.Core.Entities;
+
+namespace Refactoring.FraudDetection.Core.Normalizers
 {
-    public class StreetNormalizer : INormalizer
+    public class StreetNormalizer : ISimpleNormalizer
     {
-        public void Normalize(FraudRadar.Order order)
+        public void Normalize(Order order)
         {
             order.Street = order.Street.Replace("st.", "street").Replace("rd.", "road");
         }

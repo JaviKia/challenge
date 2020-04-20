@@ -5,20 +5,20 @@
 namespace Refactoring.FraudDetection
 {
     using Refactoring.FraudDetection.Core;
+    using Refactoring.FraudDetection.Core.Entities;
     using Refactoring.FraudDetection.Core.Normalizers;
     using System;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Reflection;
 
     public class FraudRadar
     {
         private IStorageReader _storageReader;
+        private IOrderNormalizer _orderNormalizer;
 
-        public FraudRadar(IStorageReader storageReader)
+        public FraudRadar(IOrderNormalizer orderNormalizer, IStorageReader storageReader)
         {
             this._storageReader = storageReader;
+            this._orderNormalizer = orderNormalizer;
         }
         public IEnumerable<FraudResult> Check()
         {
@@ -47,18 +47,7 @@ namespace Refactoring.FraudDetection
                 orders.Add(order);
             }
 
-            var normalizers = from t in Assembly.GetExecutingAssembly().GetTypes()
-                            where t.GetInterfaces().Contains(typeof(INormalizer))
-                                     && t.GetConstructor(Type.EmptyTypes) != null
-                            select Activator.CreateInstance(t) as INormalizer;
-            // NORMALIZE
-            foreach (var order in orders)
-            {
-                foreach (var normalizer in normalizers)
-                {
-                    normalizer.Normalize(order); 
-                }
-            }
+            this._orderNormalizer.Normalize(orders);
 
             // CHECK FRAUD
             for (int i = 0; i < orders.Count; i++)
@@ -97,30 +86,5 @@ namespace Refactoring.FraudDetection
             return fraudResults;
         }
 
-        public class FraudResult
-        {
-            public int OrderId { get; set; }
-
-            public bool IsFraudulent { get; set; }
-        }
-
-        public class Order
-        {
-            public int OrderId { get; set; }
-
-            public int DealId { get; set; }
-
-            public string Email { get; set; }
-
-            public string Street { get; set; }
-
-            public string City { get; set; }
-
-            public string State { get; set; }
-
-            public string ZipCode { get; set; }
-
-            public string CreditCard { get; set; }
-        }
     }
 }

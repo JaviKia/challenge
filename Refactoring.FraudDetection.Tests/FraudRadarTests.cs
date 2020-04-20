@@ -9,6 +9,8 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Refactoring.FraudDetection.Core;
+using Refactoring.FraudDetection.Core.Entities;
+using Refactoring.FraudDetection.Core.Normalizers;
 
 namespace Refactoring.FraudDetection.Tests
 {
@@ -59,10 +61,11 @@ namespace Refactoring.FraudDetection.Tests
             result.Should().HaveCount(2, "The result should contains the number of lines of the file");
         }
 
-        private static List<FraudRadar.FraudResult> ExecuteTest(string filePath)
+        private static List<FraudResult> ExecuteTest(string filePath)
         {
-            IStorageReader storageReader = new StorageReader(filePath);
-            var fraudRadar = new FraudRadar(storageReader);
+            var storageReader = new StorageReader(filePath);
+            var orderNormalizer = new OrderNormalizer();
+            var fraudRadar = new FraudRadar(orderNormalizer, storageReader);
 
             return fraudRadar.Check().ToList();
         }

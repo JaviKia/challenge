@@ -1,9 +1,9 @@
-﻿using System;
-using static Refactoring.FraudDetection.FraudRadar;
+﻿using Refactoring.FraudDetection.Core.Entities;
+using System;
 
 namespace Refactoring.FraudDetection.Core.Normalizers
 {
-    public class EmailNormalizer :INormalizer
+    public class EmailNormalizer :ISimpleNormalizer
     {
         public void Normalize(Order order)
         {

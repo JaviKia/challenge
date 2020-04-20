@@ -5,9 +5,12 @@
 namespace Refactoring.FraudDetection
 {
     using Refactoring.FraudDetection.Core;
+    using Refactoring.FraudDetection.Core.Normalizers;
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
+    using System.Reflection;
 
     public class FraudRadar
     {
@@ -44,23 +47,17 @@ namespace Refactoring.FraudDetection
                 orders.Add(order);
             }
 
+            var normalizers = from t in Assembly.GetExecutingAssembly().GetTypes()
+                            where t.GetInterfaces().Contains(typeof(INormalizer))
+                                     && t.GetConstructor(Type.EmptyTypes) != null
+                            select Activator.CreateInstance(t) as INormalizer;
             // NORMALIZE
             foreach (var order in orders)
             {
-                //Normalize email
-                var aux = order.Email.Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
-
-                var atIndex = aux[0].IndexOf("+", StringComparison.Ordinal);
-
-                aux[0] = atIndex < 0 ? aux[0].Replace(".", "") : aux[0].Replace(".", "").Remove(atIndex);
-
-                order.Email = string.Join("@", new string[] { aux[0], aux[1] });
-
-                //Normalize street
-                order.Street = order.Street.Replace("st.", "street").Replace("rd.", "road");
-
-                //Normalize state
-                order.State = order.State.Replace("il", "illinois").Replace("ca", "california").Replace("ny", "new york");
+                foreach (var normalizer in normalizers)
+                {
+                    normalizer.Normalize(order); 
+                }
             }
 
             // CHECK FRAUD

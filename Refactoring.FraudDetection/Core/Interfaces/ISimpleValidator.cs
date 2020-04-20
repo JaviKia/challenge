@@ -1,6 +1,6 @@
 ﻿using Refactoring.FraudDetection.Core.Entities;
 
-namespace Refactoring.FraudDetection.Core.Validators
+namespace Refactoring.FraudDetection.Core.Interfaces
 {
     public interface ISimpleValidator
     {

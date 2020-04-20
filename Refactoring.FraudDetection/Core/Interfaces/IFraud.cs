@@ -1,7 +1,7 @@
 ﻿using Refactoring.FraudDetection.Core.Entities;
 using System.Collections.Generic;
 
-namespace Refactoring.FraudDetection.Core.Validators
+namespace Refactoring.FraudDetection.Core.Interfaces
 {
     public interface IFraud
     {

@@ -1,6 +1,6 @@
 ﻿using Refactoring.FraudDetection.Core.Entities;
 
-namespace Refactoring.FraudDetection.Core.Normalizers
+namespace Refactoring.FraudDetection.Core.Interfaces
 {
     public interface ISimpleNormalizer
     {

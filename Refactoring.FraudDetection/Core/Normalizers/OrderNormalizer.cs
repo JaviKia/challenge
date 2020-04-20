@@ -1,4 +1,5 @@
-﻿using Refactoring.FraudDetection.Core.Entities;
+﻿using Refactoring.FraudDetection.Core.Interfaces;
+using Refactoring.FraudDetection.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

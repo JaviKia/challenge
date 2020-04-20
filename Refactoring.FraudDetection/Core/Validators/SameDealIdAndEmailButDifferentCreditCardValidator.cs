@@ -1,4 +1,5 @@
 ﻿using Refactoring.FraudDetection.Core.Entities;
+using Refactoring.FraudDetection.Core.Interfaces;
 
 namespace Refactoring.FraudDetection.Core.Validators
 {

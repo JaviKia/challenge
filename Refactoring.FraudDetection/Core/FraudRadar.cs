@@ -2,12 +2,10 @@
 // Copyright (c) Payvision. All rights reserved.
 // </copyright>
 
-namespace Refactoring.FraudDetection
+namespace Refactoring.FraudDetection.Core
 {
-    using Refactoring.FraudDetection.Core;
     using Refactoring.FraudDetection.Core.Entities;
-    using Refactoring.FraudDetection.Core.Normalizers;
-    using Refactoring.FraudDetection.Core.Validators;
+    using Refactoring.FraudDetection.Core.Interfaces;
     using System.Collections.Generic;
 
     public class FraudRadar

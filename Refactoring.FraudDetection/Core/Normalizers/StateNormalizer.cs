@@ -1,4 +1,5 @@
-﻿using Refactoring.FraudDetection.Core.Entities;
+﻿using Refactoring.FraudDetection.Core.Interfaces;
+using Refactoring.FraudDetection.Core.Entities;
 
 namespace Refactoring.FraudDetection.Core.Normalizers
 {

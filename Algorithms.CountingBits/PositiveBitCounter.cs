@@ -11,7 +11,25 @@ namespace Algorithms.CountingBits
     {
         public IEnumerable<int> Count(int input)
         {
-            throw new NotImplementedException();
+            if (input < 0)
+                throw new ArgumentException();
+            var positions = new List<int>
+            {
+                0
+            };
+            int currentPosition = 0;
+            while (input > 0)
+            {
+                if ((input & 1) == 1)
+                {
+                    positions.Add(currentPosition);
+                    positions[0] ++;
+                }
+                input >>= 1;
+                currentPosition++;
+            }
+            return positions;
         }
+
     }
 }
